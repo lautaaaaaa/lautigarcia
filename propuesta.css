@@ -1,0 +1,74 @@
+/* Propuestas por cliente: estilos extra sobre styles.css */
+
+/* ---------- Barra superior: no queda fija, scrollea con la página ---------- */
+.prop .nav { position: absolute; }
+.prop .nav.is-solid { background: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* ---------- Cabecera centrada, al ancho del video ---------- */
+.prop-hero { padding-top: 76px; padding-bottom: 28px; position: relative; overflow: clip; text-align: center; }
+.prop-hero::before {
+  content: ""; position: absolute; left: 50%; top: -280px; width: 1000px; height: 620px; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(29, 107, 80, .13), transparent 70%); pointer-events: none;
+}
+.prop-hero .wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+.prop-client { display: flex; justify-content: center; margin-bottom: 10px; }
+.prop-logo {
+  width: 72px; height: 72px; border-radius: 20px; display: grid; place-items: center; overflow: hidden;
+  background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow);
+  font-family: var(--f-display); font-size: 28px; color: var(--ink);
+}
+.prop-logo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+/* Logo horizontal (con texto): sin caja, solo la imagen */
+.prop-logo.is-wide { display: flex; align-items: center; justify-content: center; width: auto; height: auto; border: 0; background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+.prop-logo.is-wide img { width: auto; height: 48px; max-width: 70vw; padding: 0; object-fit: contain; }
+.prop-kicker { font-size: 15px; letter-spacing: .01em; color: var(--ink-soft); }
+.prop-kicker b { font-size: 16px; color: var(--accent); }
+.prop-title { max-width: 1040px; margin: 10px auto 0; font-size: clamp(34px, 6.4vw, 66px); line-height: 1.04; }
+/* La aparición la maneja .reveal; sin la animación propia del hero de la home (se pisaban) */
+.prop-hero .hero-sub { max-width: 780px; margin: 14px auto 0; font-size: 16.5px; animation: none; }
+
+/* ---------- Video a todo el ancho ---------- */
+.prop-video-sec { padding-top: 6px; }
+.prop-video {
+  position: relative; aspect-ratio: 16/9; border-radius: 24px; overflow: hidden; max-width: 1040px; margin-inline: auto;
+  background: var(--paper); border: 1.5px dashed rgba(18, 32, 26, .22);
+  display: grid; place-items: center; text-align: center; color: var(--ink-mute); font-size: 14px;
+}
+.prop-video.is-ready { border: 0; background: var(--dark); box-shadow: 0 30px 60px -30px rgba(18, 32, 26, .45); }
+.prop-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+/* Tapa el botón de "abrir en Drive" (arriba a la derecha del reproductor) */
+.prop-video-shield { position: absolute; top: 0; right: 0; width: 76px; height: 72px; z-index: 2; cursor: default; }
+
+/* ---------- Títulos de sección centrados en la propuesta ---------- */
+.prop .sec-head { margin-inline: auto; text-align: center; max-width: 860px; }
+.prop .sec-head .eyebrow { justify-content: center; }
+.prop .sec-head .lead { margin-inline: auto; }
+
+/* ---------- Lo que incluye ---------- */
+.inc-grid { display: grid; gap: 12px; }
+.inc { padding: 24px; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); }
+.inc h3 { font-family: var(--f-display); font-size: 26px; line-height: 1.15; margin-top: 8px; }
+.inc p:not(.sys-tag) { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
+
+/* ---------- CTA final compacto: un solo botón de WhatsApp ---------- */
+.prop .final { padding-block: 0; }
+.prop .final-inner { padding-block: 40px; }
+.prop .final .h2 { font-size: clamp(30px, 5vw, 44px); margin-top: 8px; }
+.prop .final p { font-size: 16px; margin-top: 8px; max-width: none; text-wrap: balance; }
+.prop-ctas { display: flex; justify-content: center; margin-top: 18px; }
+.prop-ctas .btn { margin-top: 0; }
+
+@media (min-width: 760px) {
+  /* En pantallas grandes el logo sube a la altura de la barra, entre "Lautaro García" y "Escribirme" */
+  .prop-hero { padding-top: 14px; }
+  .prop-client { height: 48px; align-items: center; margin-bottom: 20px; }
+  .prop-logo { width: 48px; height: 48px; border-radius: 14px; font-size: 20px; }
+  .prop-logo.is-wide { width: auto; height: auto; }
+  .prop-logo.is-wide img { height: 44px; }
+  .prop-hero .hero-sub { max-width: 860px; }
+  .inc-grid { grid-template-columns: repeat(2, 1fr); }
+  .prop .final p { white-space: nowrap; }
+}
+@media (min-width: 1080px) {
+  .inc-grid { grid-template-columns: repeat(4, 1fr); }
+}
