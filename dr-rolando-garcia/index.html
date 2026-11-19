@@ -25,10 +25,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20261116i">
   <link rel="stylesheet" href="../demo/demo.css?v=20261116i">
-  <link rel="stylesheet" href="../propuesta.css?v=20261116i">
+  <link rel="stylesheet" href="../propuesta.css?v=20261119c">
   <style>
     /* Sin logo ni titular: el "Video para..." queda debajo del menú */
-    .prop .prop-hero { padding-top: 88px; padding-bottom: 22px; }
+    .prop .prop-hero { padding-top: 88px; padding-bottom: 22px; overflow-x: clip; overflow-y: visible; }
     .prop .prop-kicker { font-size: 17px; }
     .prop .prop-kicker b { font-size: 18px; }
   </style>
@@ -39,16 +39,18 @@
     window.PROPUESTA = {
       pestana: "Video para Dr. Rolando García · Lautaro García",
       cliente: "Dr. Rolando García",
-      clinica: "Consultorio Dr. García",
-      medico: "el Dr. García",
-      saludo: "Dr. García",
+      clinica: "Consultorio Dr. Rolando García",
+      medico: "el Dr. Rolando García",
+      saludo: "Dr. Rolando García",
       logo: "",
       logoChat: "",
       ciudad: "Guadalajara",
 
-      video: "https://drive.google.com/file/d/1lfojPbkpPWgrisFupQe0S2IU2nOYPC2q/view?usp=sharing",
+      video: "video.mp4",
+      poster: "poster.jpg",
 
-      tratamientos: "Botox,Rellenos,Rinoplastia,Liposucción,Aumento mamario",
+      tratamientos: "Abdominoplastia,Lifting facial,Cirugía mamaria,Lipoescultura,Rinoplastia,Blefaroplastia,Mommy makeover,Botox",
+      crm: "Abdominoplastia,Lifting facial,Cirugía mamaria",
       origen: "Instagram",
 
       ctaMensaje: "Hola Lautaro, vi el video que me mandaste."
@@ -56,8 +58,8 @@
   </script>
 
   <script src="../config.js?v=20261116i" defer></script>
-  <script src="../propuesta.js?v=20261119a" defer></script>
-  <script src="../demo/demo.js?v=20261116i" defer></script>
+  <script src="../propuesta.js?v=20261119c" defer></script>
+  <script src="../demo/demo.js?v=20261119c" defer></script>
   <script src="../main.js?v=20261116i" defer></script>
 </head>
 <body class="prop">

@@ -9,6 +9,7 @@
           data-doctor="la Dra. Valeria Ruiz"      (cómo se nombra al médico dentro de una frase)
           data-treatments="Botox,Rellenos,Rinoplastia"   (opcional)
           data-source="Instagram"                 (origen que se registra en el CRM, opcional)
+          data-crm="Botox,Rellenos,Rinoplastia"   (opcional: tratamientos de las 3 filas de ejemplo del CRM)
           data-logo="logo.png"></div>             (opcional, avatar del chat)
 
    Es una conversación guionada (no una IA real): reconoce intenciones
@@ -23,6 +24,14 @@
 
   // Orden: lo más específico primero (liposucción antes que lipo, rinomodelación antes que rino...)
   var TREAT_RX = [
+    ["Lipoabdominoplastia", "lipo ?abdomino"],
+    ["Mommy makeover", "mommy|mami ?makeover|makeover"],
+    ["Lipopapada", "lipo ?(de (la )?)?papada|papada"],
+    ["Lifting de cuello", "lifting (de(l)? )?cuello|cuello"],
+    ["Braquioplastia", "braqui\\w*plast|brachi\\w*plast|lifting (de )?brazos?|brazos?"],
+    ["Lifting de muslos", "lifting (de )?muslos?|muslos?"],
+    ["Lifting facial", "lifting (facial|de (la )?(cara|rostro))|face ?lift|ritidec|estiramiento facial|\\blifting\\b"],
+    ["Cirugía mamaria", "cirugia (de |en )?(la |los )?(mamas?|busto|senos?|pechos?)|cirugia mamaria"],
     ["Liposucción", "liposuc|lipo ?succ"],
     ["Rinomodelación", "rinomodel|rino ?model|nariz sin cirugia"],
     ["Reducción mamaria", "reduc\\w* (de )?(busto|mama|senos|pecho)|reduccion mamaria"],
@@ -46,7 +55,9 @@
     ["rinoplastia", "Rinoplastia"], ["rinomodelacion", "Rinomodelación"], ["liposuccion", "Liposucción"],
     ["lipoescultura", "Lipoescultura"], ["abdominoplastia", "Abdominoplastia"], ["blefaroplastia", "Blefaroplastia"],
     ["bichectomia", "Bichectomía"], ["mastopexia", "Levantamiento de busto"], ["implantes", "Aumento mamario"],
-    ["depilacion", "Depilación láser"], ["peeling", "Tratamiento facial"]
+    ["depilacion", "Depilación láser"], ["peeling", "Tratamiento facial"],
+    ["lipopapada", "Lipopapada"], ["braquioplastia", "Braquioplastia"], ["lifting", "Lifting facial"],
+    ["lipoabdominoplastia", "Lipoabdominoplastia"]
   ];
   function editDist(a, b) {
     if (Math.abs(a.length - b.length) > 2) return 9;
@@ -148,6 +159,7 @@
     var doctor = root.getAttribute("data-doctor") || "el doctor";
     var source = root.getAttribute("data-source") || "Instagram";
     var logo = root.getAttribute("data-logo") || "";
+    var crmTreatments = (root.getAttribute("data-crm") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     var treatments = (root.getAttribute("data-treatments") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     if (!treatments.length) treatments = DEFAULT_TREATMENTS.slice();
     // "el Consultorio...", "la Clínica...", o el nombre solo
@@ -253,7 +265,9 @@
       tbody.innerHTML = "";
       seedRows = CRM_SEED.map(function (r) {
         var copy = {}; for (var k in r) copy[k] = r[k];
-        if (copy.t !== "Valoración") copy.t = treatments[CRM_SEED.indexOf(r) % treatments.length];
+        var idx = CRM_SEED.indexOf(r);
+        if (crmTreatments[idx]) copy.t = crmTreatments[idx];
+        else if (copy.t !== "Valoración") copy.t = treatments[idx % treatments.length];
         copy.row = el("tr", "", rowHTML(copy)); tbody.appendChild(copy.row);
         return copy;
       });

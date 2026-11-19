@@ -56,8 +56,27 @@
 
   function video() {
     var box = document.querySelector("[data-p-loom]");
-    var src = videoEmbed(P.video || P.loom);
-    if (!box || !src) return;
+    var raw = String(P.video || P.loom || "").trim();
+    if (!box || !raw) return;
+    // Video propio (.mp4 en la carpeta del cliente): reproductor nativo, funciona bien en celular
+    if (/\.mp4([?#]|$)/i.test(raw)) {
+      box.innerHTML = "";
+      var v = document.createElement("video");
+      v.src = local(raw); v.controls = false; v.preload = "metadata";
+      v.setAttribute("playsinline", ""); v.setAttribute("controlslist", "nodownload");
+      if (P.poster) v.poster = local(P.poster);
+      box.appendChild(v);
+      // Play grande y centrado hasta que arranca; después quedan los controles nativos
+      var play = document.createElement("button");
+      play.type = "button"; play.className = "prop-play"; play.setAttribute("aria-label", "Reproducir video");
+      play.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      play.addEventListener("click", function () { v.play(); });
+      v.addEventListener("play", function () { v.controls = true; box.classList.add("is-playing"); });
+      box.appendChild(play);
+      box.classList.add("is-ready");
+      return;
+    }
+    var src = videoEmbed(raw);
     box.innerHTML = "";
     var f = document.createElement("iframe");
     f.src = src; f.allowFullscreen = true; f.title = "Video propuesta";
@@ -79,6 +98,7 @@
     d.setAttribute("data-doctor", P.medico || "el doctor");
     if (P.tratamientos) d.setAttribute("data-treatments", P.tratamientos);
     if (P.origen) d.setAttribute("data-source", P.origen);
+    if (P.crm) d.setAttribute("data-crm", P.crm);
     // El avatar del chat es redondo: solo usa un logo cuadrado (logoChat); si no, iniciales
     if (P.logoChat) d.setAttribute("data-logo", local(P.logoChat));
     d.setAttribute("data-lg-demo", "");
