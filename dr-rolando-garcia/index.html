@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <!-- Página privada: no se indexa ni se linkea desde la home -->
   <meta name="robots" content="noindex, nofollow">
-  <title>Propuesta para Dr. Rolando García · Lautaro García</title>
+  <title>Video para Dr. Rolando García · Lautaro García</title>
   <meta name="theme-color" content="#f6f3ee">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2312201a'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='34' fill='%237fd1ad'%3ELG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +14,18 @@
   <link rel="stylesheet" href="../styles.css?v=20261116i">
   <link rel="stylesheet" href="../demo/demo.css?v=20261116i">
   <link rel="stylesheet" href="../propuesta.css?v=20261116i">
+  <style>
+    /* Sin logo ni titular: el "Video para..." queda debajo del menú */
+    .prop .prop-hero { padding-top: 88px; padding-bottom: 22px; }
+    .prop .prop-kicker { font-size: 17px; }
+    .prop .prop-kicker b { font-size: 18px; }
+  </style>
   <script>document.documentElement.classList.remove('no-js');</script>
 
     <!-- Propuesta: Dr. Rolando García. URL: lautigarcia.com/dr-rolando-garcia -->
   <script>
     window.PROPUESTA = {
+      pestana: "Video para Dr. Rolando García · Lautaro García",
       cliente: "Dr. Rolando García",
       clinica: "Consultorio Dr. García",
       medico: "el Dr. García",
@@ -27,32 +34,17 @@
       logoChat: "",
       ciudad: "",
 
-      titular: "Que cada paciente que le escribe a su consultorio termine en su agenda.",
-      descripcion: "Preparé esta propuesta después de revisar cómo llegan hoy los pacientes a su consultorio. Abajo le dejo el video donde se lo explico y una demo con el nombre de su consultorio para que vea cómo funcionaría.",
-
       video: "",
 
       tratamientos: "Botox,Rellenos,Rinoplastia,Liposucción,Aumento mamario",
       origen: "Instagram",
 
-      incluye: {
-        agente: true,
-        antes: true,
-        despues: true,
-        pipeline: true,
-        medicion: true,
-        web: true,
-        seo: true,
-        maps: true
-      },
-
-      ctaTexto: "Hablemos por WhatsApp",
-      ctaMensaje: "Hola Lautaro, vi la propuesta para mi consultorio y quiero avanzar."
+      ctaMensaje: "Hola Lautaro, vi el video que me mandaste."
     };
   </script>
 
   <script src="../config.js?v=20261116i" defer></script>
-  <script src="../propuesta.js?v=20261116i" defer></script>
+  <script src="../propuesta.js?v=20261119a" defer></script>
   <script src="../demo/demo.js?v=20261116i" defer></script>
   <script src="../main.js?v=20261116i" defer></script>
 </head>
@@ -66,15 +58,10 @@
 </header>
 
 <main>
-  <!-- 1. Cliente + promesa -->
+  <!-- 1. Para quién es el video -->
   <section class="prop-hero">
     <div class="wrap">
-      <div class="prop-client reveal">
-        <span class="prop-logo" data-p-logo></span>
-      </div>
-      <p class="hero-kicker prop-kicker reveal">Propuesta para <b data-p="cliente">Dr. Rolando García</b></p>
-      <h1 class="hero-title prop-title reveal" data-p="titular">Que cada paciente que le escribe termine en su agenda.</h1>
-      <p class="hero-sub reveal" data-p="descripcion"></p>
+      <p class="hero-kicker prop-kicker reveal">Video para <b data-p="cliente">Dr. Rolando García</b></p>
     </div>
   </section>
 
@@ -82,7 +69,7 @@
   <section class="prop-video-sec" id="video">
     <div class="wrap">
       <div class="prop-video reveal" data-p-loom>
-        <span><span class="pending">[PENDIENTE]</span><br>Video propuesta</span>
+        <span><span class="pending">[PENDIENTE]</span><br>Video</span>
       </div>
     </div>
   </section>
@@ -100,75 +87,10 @@
     </div>
   </section>
 
-  <!-- 4. Lo que incluye -->
-  <section id="incluye">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow">Lo que incluye</span>
-        <h2 class="h2">Lo que instalo en <em data-p="clinica">su clínica.</em></h2>
-      </div>
-      <div class="inc-grid">
-        <article class="inc reveal" data-inc="agente">
-          <p class="sys-tag">WhatsApp</p>
-          <h3>Agente que responde al instante</h3>
-          <p>24/7, con la información y el tono de su clínica. Deriva a su equipo cuando hace falta, nunca diagnostica y hace seguimiento a quien no agendó.</p>
-        </article>
-        <article class="inc reveal" data-inc="antes">
-          <p class="sys-tag">Antes de la consulta</p>
-          <h3>Confirmación y recordatorios</h3>
-          <p>Confirma la cita, envía recordatorios e indicaciones y ofrece reprogramar en lugar de faltar. Menos no-shows.</p>
-        </article>
-        <article class="inc reveal" data-inc="despues">
-          <p class="sys-tag">Después de la consulta</p>
-          <h3>Seguimiento y reseñas</h3>
-          <p>Pregunta cómo le fue al paciente y, si le fue bien, le pide la reseña en Google con el link directo, específica del tratamiento.</p>
-        </article>
-        <article class="inc reveal" data-inc="pipeline">
-          <p class="sys-tag">Pacientes que vuelven</p>
-          <h3>Recurrencia y reactivación</h3>
-          <p>Avisa cuando toca el control o el retoque, y reactiva su base: controles pendientes, quienes consultaron y no fueron, pacientes para reseña.</p>
-        </article>
-        <article class="inc reveal" data-inc="medicion">
-          <p class="sys-tag">Medición</p>
-          <h3>Dashboard y reporte semanal</h3>
-          <p>De dónde llegó cada paciente, dashboard en tiempo real y un reporte cada semana con lo que entró, se agendó y asistió.</p>
-        </article>
-        <article class="inc reveal" data-inc="web">
-          <p class="sys-tag">Web</p>
-          <h3>Web propia que convierte</h3>
-          <p>Rápida, pensada para el celular y con un solo objetivo: que el paciente le escriba por WhatsApp.</p>
-        </article>
-        <article class="inc reveal" data-inc="seo">
-          <p class="sys-tag">Google e IA</p>
-          <h3>SEO y AEO</h3>
-          <p>Para aparecer cuando buscan su tratamiento en Google o se lo preguntan a una IA.</p>
-        </article>
-        <article class="inc reveal" data-inc="maps">
-          <p class="sys-tag">Google Maps</p>
-          <h3>Ficha optimizada</h3>
-          <p>Completa y con reseñas reales que pide el propio sistema, para subir en Maps.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. CTA -->
-  <section class="final">
-    <div class="wrap final-inner reveal">
-      <span class="eyebrow">Siguiente paso</span>
-      <h2 class="h2">¿Avanzamos, <em data-p="saludo">doctor</em>?</h2>
-      <p>Escríbame por WhatsApp y coordinamos la llamada de arranque.</p>
-      <div class="prop-ctas">
-        <a class="btn btn-wa" href="https://wa.me/5492804028061" data-wa data-p-cta-msg><span data-p="ctaTexto">Hablemos por WhatsApp</span></a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
   <div class="wrap footer-inner">
-    <a href="../privacidad/">Aviso de privacidad</a>
-    <a href="https://wa.me/5492804028061" data-wa>WhatsApp</a>
     <span>© <span data-year>2026</span> Lautaro García</span>
   </div>
 </footer>

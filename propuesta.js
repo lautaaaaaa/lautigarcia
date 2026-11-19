@@ -36,7 +36,8 @@
       if (P[k]) els[i].textContent = P[k];
     }
     var who = P.cliente || P.clinica;
-    if (who) document.title = "Propuesta para " + who + " · Lautaro García";
+    if (P.pestana) document.title = P.pestana;
+    else if (who) document.title = "Propuesta para " + who + " · Lautaro García";
   }
 
   function logo() {
