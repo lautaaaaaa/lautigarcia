@@ -99,6 +99,7 @@
     if (P.tratamientos) d.setAttribute("data-treatments", P.tratamientos);
     if (P.origen) d.setAttribute("data-source", P.origen);
     if (P.crm) d.setAttribute("data-crm", P.crm);
+    if (P.crmNombre) d.setAttribute("data-crm-name", P.crmNombre);
     // El avatar del chat es redondo: solo usa un logo cuadrado (logoChat); si no, iniciales
     if (P.logoChat) d.setAttribute("data-logo", local(P.logoChat));
     d.setAttribute("data-lg-demo", "");

@@ -10,6 +10,7 @@
           data-treatments="Botox,Rellenos,Rinoplastia"   (opcional)
           data-source="Instagram"                 (origen que se registra en el CRM, opcional)
           data-crm="Botox,Rellenos,Rinoplastia"   (opcional: tratamientos de las 3 filas de ejemplo del CRM)
+          data-crm-name="AgendaPro"               (opcional: nombre del CRM que usa la clínica; por defecto "CRM")
           data-logo="logo.png"></div>             (opcional, avatar del chat)
 
    Es una conversación guionada (no una IA real): reconoce intenciones
@@ -165,6 +166,7 @@
     var doctor = root.getAttribute("data-doctor") || "el doctor";
     var source = root.getAttribute("data-source") || "Instagram";
     var logo = root.getAttribute("data-logo") || "";
+    var crmName = root.getAttribute("data-crm-name") || "CRM";
     var crmTreatments = (root.getAttribute("data-crm") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     var treatments = (root.getAttribute("data-treatments") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     if (!treatments.length) treatments = DEFAULT_TREATMENTS.slice();
@@ -205,7 +207,7 @@
     var cal = el("div", "lgd-cal");
     calPanel.appendChild(cal);
     var crmPanel = el("div", "lgd-panel");
-    crmPanel.innerHTML = '<div class="lgd-ph"><span class="lgd-pt">' + ICON_CRM + 'Pacientes (CRM)</span><span class="lgd-badge">Actualizado</span></div>';
+    crmPanel.innerHTML = '<div class="lgd-ph"><span class="lgd-pt">' + ICON_CRM + 'Pacientes (' + esc(crmName) + ')</span><span class="lgd-badge">Actualizado</span></div>';
     var crmWrap = el("div", "lgd-crm-wrap");
     var crm = el("table", "lgd-crm", "<thead><tr><th>Paciente</th><th>Tratamiento</th><th>Origen</th><th>Estado</th></tr></thead>");
     var tbody = el("tbody");
