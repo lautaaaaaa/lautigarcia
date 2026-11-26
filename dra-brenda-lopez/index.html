@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Lautaro García">
   <meta property="og:title" content="Propuesta para Dra. Brenda López">
-  <meta property="og:description" content="Un video corto que grabé para Skin Rejuvenes.">
+  <meta property="og:description" content="Un video corto que grabé para Skin Rejuveness.">
   <meta property="og:url" content="https://www.lautigarcia.com/dra-brenda-lopez">
   <meta property="og:image" content="https://www.lautigarcia.com/dra-brenda-lopez/og.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -26,20 +26,24 @@
   <link rel="stylesheet" href="../styles.css?v=20261116i">
   <link rel="stylesheet" href="../demo/demo.css?v=20261126a">
   <link rel="stylesheet" href="../propuesta.css?v=20261119c">
+  <style>
+    /* Sin logo arriba: el "Propuesta para..." queda debajo del menú */
+    .prop .prop-hero { padding-top: 100px; }
+    @media (max-width: 720px) { .prop .prop-hero { padding-top: 92px; } }
+  </style>
   <script>document.documentElement.classList.remove('no-js');</script>
 
-    <!-- Propuesta simple (solo el asistente de WhatsApp): Dra. Brenda López, Skin Rejuvenes. URL: lautigarcia.com/dra-brenda-lopez -->
+    <!-- Propuesta simple (solo el asistente de WhatsApp): Dra. Brenda López, Skin Rejuveness. URL: lautigarcia.com/dra-brenda-lopez -->
   <script>
     window.PROPUESTA = {
       cliente: "Dra. Brenda López",
-      clinica: "Skin Rejuvenes",
+      clinica: "Skin Rejuveness",
       medico: "la Dra. Brenda López",
-      saludo: "Dra. López",
       logo: "",
       logoChat: "",
 
       titular: "Que cada paciente que le escribe por WhatsApp tenga respuesta al momento.",
-      descripcion: "Le grabé un video corto con una idea puntual para Skin Rejuvenes: un asistente en su WhatsApp que responde a sus pacientes y les agenda la cita. Abajo puede probarlo con el nombre de su consultorio.",
+      descripcion: "Le grabé un video corto con una idea puntual para Skin Rejuveness: un asistente en su WhatsApp que responde rápido a sus pacientes, agenda citas y les hace seguimiento cuando les toca un retoque. Debajo del video puede ver una prueba.",
 
       video: "video.mp4",
       poster: "poster.jpg",
@@ -48,8 +52,7 @@
       crm: "Botox,Tratamiento facial,Rellenos",
       origen: "Instagram",
 
-      ctaTexto: "Hablemos por WhatsApp",
-      ctaMensaje: "Hola Lautaro, vi la propuesta del asistente de WhatsApp para Skin Rejuvenes."
+      ctaMensaje: "Hola Lautaro, vi la propuesta del asistente de WhatsApp para Skin Rejuveness."
     };
   </script>
 
@@ -71,9 +74,6 @@
   <!-- 1. Cliente + promesa -->
   <section class="prop-hero">
     <div class="wrap">
-      <div class="prop-client reveal">
-        <span class="prop-logo" data-p-logo></span>
-      </div>
       <p class="hero-kicker prop-kicker reveal">Propuesta para <b data-p="cliente">Dra. Brenda López</b></p>
       <h1 class="hero-title prop-title reveal" data-p="titular">Que cada paciente que le escribe por WhatsApp tenga respuesta al momento.</h1>
       <p class="hero-sub reveal" data-p="descripcion"></p>
@@ -102,23 +102,10 @@
     </div>
   </section>
 
-  <!-- 4. CTA (propuesta simple: sin sección "Lo que incluye") -->
-  <section class="final">
-    <div class="wrap final-inner reveal">
-      <span class="eyebrow">Siguiente paso</span>
-      <h2 class="h2">¿Lo vemos, <em data-p="saludo">doctora</em>?</h2>
-      <p>Escríbame por WhatsApp y le cuento cómo lo dejaríamos funcionando en su consultorio.</p>
-      <div class="prop-ctas">
-        <a class="btn btn-wa" href="https://wa.me/5492804028061" data-wa data-p-cta-msg><span data-p="ctaTexto">Hablemos por WhatsApp</span></a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
   <div class="wrap footer-inner">
-    <a href="../privacidad/">Aviso de privacidad</a>
-    <a href="https://wa.me/5492804028061" data-wa>WhatsApp</a>
     <span>© <span data-year>2026</span> Lautaro García</span>
   </div>
 </footer>
