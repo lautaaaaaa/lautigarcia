@@ -75,6 +75,7 @@
   background: #fff; color: var(--lgd-ink); outline: none; box-shadow: 0 1px 1px rgba(0, 0, 0, .06);
 }
 .lgd-input:focus { box-shadow: 0 0 0 2px rgba(0, 128, 105, .35); }
+.lgd-input:disabled { opacity: .6; cursor: not-allowed; }
 .lgd-send { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--lgd-wa-head); color: #fff; display: grid; place-items: center; cursor: pointer; flex: none; }
 .lgd-send:disabled { opacity: .5; cursor: default; }
 .lgd-send svg { width: 20px; height: 20px; }

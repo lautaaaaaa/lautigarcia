@@ -32,19 +32,23 @@
     ["Lifting de muslos", "lifting (de )?muslos?|muslos?"],
     ["Lifting facial", "lifting (facial|de (la )?(cara|rostro))|face ?lift|ritidec|estiramiento facial|\\blifting\\b"],
     ["Cirugía mamaria", "cirugia (de |en )?(la |los )?(mamas?|busto|senos?|pechos?)|cirugia mamaria"],
+    ["Lipotransferencia", "lipotransf|lipo ?inyec|lipo ?infiltr|transferencia de grasa|injerto de grasa"],
     ["Liposucción", "liposuc|lipo ?succ"],
     ["Rinomodelación", "rinomodel|rino ?model|nariz sin cirugia"],
-    ["Reducción mamaria", "reduc\\w* (de )?(busto|mama|senos|pecho)|reduccion mamaria"],
+    ["Reducción mamaria", "reduc\\w* (de )?(busto|mama|senos|pecho)|reduccion mamaria|mamoplastia (de )?reduc"],
     ["Levantamiento de busto", "mastopex|levant\\w* (de )?(busto|senos|pecho)"],
+    ["Aumento de glúteos", "aumento (de )?(los )?(gluteos?|pompis|pompas)|gluteoplast|implantes? (de |en )?(los )?(gluteos?|pompis|pompas)"],
+    ["Mentoplastia", "mentoplast|implantes? (de |en )?(el )?menton|cirugia (de |del )?menton"],
+    ["BodyTite", "body ?ti(te|ght)"],
     ["Levantamiento de glúteos", "\\bbbl\\b|glute|pompi|pompa"],
     ["Botox", "botox|botx|toxina|botulin|arruga|patas de gallo|entrecejo"],
     ["Rellenos", "relleno|hialuron|labio|ojera|pomulo|menton|perfilado"],
     ["Rinoplastia", "rinoplast|\\brino\\b|nariz"],
-    ["Lipoescultura", "lipoescult|lipo ?escult|\\blipo\\b|lipolaser|grasa|cintura"],
-    ["Aumento mamario", "aumento (de )?(busto|mama|senos|pecho)|mamari|implante|busto|\\bsenos?\\b|\\bpechos?\\b"],
+    ["Lipoescultura", "lipoescult|lipo ?escult|\\blipo\\b|lipo ?hd|alta definicion|lipolaser|grasa|cintura"],
+    ["Aumento mamario", "aumento (de )?(busto|mama|senos|pecho)|mamari|mamoplast|implante|busto|\\bsenos?\\b|\\bpechos?\\b"],
     ["Bichectomía", "bichectom|bichat|cachete"],
-    ["Blefaroplastia", "blefaro|parpado"],
-    ["Abdominoplastia", "abdominoplast|panza|vientre|abdomen"],
+    ["Blefaroplastia", "blefaro|parpado|ptosis"],
+    ["Abdominoplastia", "abdominoplast|lipectom|panza|vientre|abdomen"],
     ["Hilos tensores", "hilos"],
     ["Tratamiento facial", "skin|piel|mancha|acne|limpieza|peeling|facial|hidra|microneedling|mesoterapia|plasma|\\bprp\\b"],
     ["Depilación láser", "laser|depilacion"]
@@ -57,7 +61,9 @@
     ["bichectomia", "Bichectomía"], ["mastopexia", "Levantamiento de busto"], ["implantes", "Aumento mamario"],
     ["depilacion", "Depilación láser"], ["peeling", "Tratamiento facial"],
     ["lipopapada", "Lipopapada"], ["braquioplastia", "Braquioplastia"], ["lifting", "Lifting facial"],
-    ["lipoabdominoplastia", "Lipoabdominoplastia"]
+    ["lipoabdominoplastia", "Lipoabdominoplastia"], ["gluteoplastia", "Aumento de glúteos"],
+    ["mentoplastia", "Mentoplastia"], ["lipotransferencia", "Lipotransferencia"], ["mamoplastia", "Aumento mamario"],
+    ["lipectomia", "Abdominoplastia"]
   ];
   function editDist(a, b) {
     if (Math.abs(a.length - b.length) > 2) return 9;
@@ -322,8 +328,14 @@
     function setChips() {}
     function closeSheet() {}
 
-    // Avance en el tiempo (solo de la demo): una pastilla para ver el siguiente momento
+    // Avance en el tiempo (solo de la demo): una pastilla para ver el siguiente momento.
+    // Mientras está, el chat queda bloqueado: así nadie escribe "al vacío" entre un momento y otro.
     var nextBtn = null;
+    function lockInput(on) {
+      input.disabled = on; send.disabled = on;
+      if (on) { input.value = ""; input.blur(); input.placeholder = "Toque el botón de arriba para seguir"; }
+      else input.placeholder = "Responda como paciente...";
+    }
     function addNext(label, fn) {
       removeNext();
       nextBtn = el("button", "lgd-next", esc(label));
@@ -334,8 +346,13 @@
         fn();
       });
       body.appendChild(nextBtn); scrollChat();
+      lockInput(true);
     }
-    function removeNext() { if (nextBtn && nextBtn.parentNode) nextBtn.parentNode.removeChild(nextBtn); nextBtn = null; }
+    function removeNext() {
+      if (nextBtn && nextBtn.parentNode) nextBtn.parentNode.removeChild(nextBtn);
+      if (nextBtn) lockInput(false);
+      nextBtn = null;
+    }
     function nextToEnd() { if (nextBtn) { body.appendChild(nextBtn); scrollChat(); } }
     function setBusy(v) { S.busy = v; if (v) setChips([]); }
 
@@ -560,7 +577,7 @@
       for (i = 0; i < days.length; i++) if (t.indexOf(norm(DAYS[days[i].getDay()])) > -1) { d = i; break; }
       if (d === null) return { slot: SLOTS_B[0], none: true };
       if (tm && !isBusy(d, tm)) return { slot: { d: d, t: tm } };
-      if (!tm) for (i = 0; i < FREE_TIMES.length; i++) if (!isBusy(d, FREE_TIMES[i])) return { slot: { d: d, t: FREE_TIMES[i] }, notime: true };
+      if (!tm) for (i = 0; i < FREE_TIMES.length; i++) if (!isBusy(d, FREE_TIMES[i]) && !(S.event && S.event.d === d && S.event.t === FREE_TIMES[i])) return { slot: { d: d, t: FREE_TIMES[i] }, notime: true };
       for (i = 0; i < FREE_TIMES.length; i++) if (!isBusy(d, FREE_TIMES[i])) return { slot: { d: d, t: FREE_TIMES[i] }, busy: !!tm, wanted: tm };
       return { slot: SLOTS_B[0] };
     }
@@ -575,9 +592,9 @@
       }
       return out.sort(function (a, b) { return a.t < b.t ? -1 : 1; });
     }
-    function laterSlots(n, exclude) {
+    function laterSlots(n, exclude, fromDay) {
       var ev = S.event, out = [], order = ["12:30", "16:00", "10:00", "18:00", "15:00"];
-      for (var d = ev.d; d < days.length && out.length < n; d++) {
+      for (var d = fromDay != null ? fromDay : ev.d; d < days.length && out.length < n; d++) {
         for (var k = 0; k < order.length; k++) {
           var t = order[k];
           if (d === ev.d && t <= ev.t) continue;
@@ -784,7 +801,7 @@
           say([
             "Excelente, " + esc(first()) + ". Su " + trn + " quedó agendada:<br><br>📅 <b>" + slotBtn(S.chosen) + "</b><br>📍 " + esc(clinic),
             "Un día antes le escribo para confirmar y con las indicaciones. Si le surge algo, puede reprogramar desde aquí mismo."
-          ], function () { addNext("⏩ Ver qué pasa 24 horas antes de la consulta", reminderStep); input.placeholder = "Responda como paciente..."; });
+          ], function () { addNext("⏩ Ver qué pasa 24 horas antes de la consulta", reminderStep); });
           break;
 
         case "wait24":
@@ -796,6 +813,15 @@
         case "reminder":
           if (/(reprog|cambi|no puedo|no podre|no podr|no voy|no llego|no alcanzo|mover|otro dia|otra fecha|otro horario|mejor el|puede ser el|imprevisto|surgio)/.test(t)) {
             var req = parseRequest(t), ev = S.event;
+            // "Mejor el viernes no": dice que no al día de su cita → otros días
+            var dayHits = days.filter(function (d) { return t.indexOf(norm(DAYS[d.getDay()])) > -1; });
+            if (dayHits.length === 1 && dayHits[0] === days[ev.d] && /\bno\b/.test(t)) {
+              var otherDays = laterSlots(2, null, ev.d + 1);
+              if (!otherDays.length) { handToReception("el paciente necesita reprogramar"); break; }
+              S.resched = true;
+              offerSlots(otherDays, "Sin problema, para eso estoy. Le puedo ofrecer");
+              break;
+            }
             var okDay = !req.none && (req.slot.d > ev.d || (req.slot.d === ev.d && req.slot.t !== ev.t));
             if (okDay && !req.busy && !req.notime) { moveTo(req.slot, "Sin problema, para eso estoy. "); break; }
             var opts, lead;
@@ -876,7 +902,7 @@
       body.innerHTML = ""; nextBtn = null;
       note.innerHTML = "Esperando el primer mensaje...";
       renderCal(); renderCRM();
-      send.disabled = false;
+      input.disabled = false; send.disabled = false;
       input.placeholder = "Escriba como si fuera un paciente...";
       addSys("Usted es un paciente y este es el WhatsApp " + (/^el /.test(clinicRef) ? "del " + esc(clinicRef.slice(3)) : "de " + esc(clinicRef)) + ". Escriba como lo haría por WhatsApp, por ejemplo: «Hola, quiero información de " + esc(lc(treatments[0])) + "».");
       addSys("Para ver cómo reconoce a alguien que ya es paciente, use el nombre Paola Gómez.");
